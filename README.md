@@ -9,6 +9,7 @@ A Node.js + Express backend application with user authentication using JWT and M
 - Secure password hashing with bcrypt
 - HTTP-only cookies for token storage
 - MySQL database integration with SSL
+- Compatible with frontend at [kodflix-fe.vercel.app](https://kodflix-fe.vercel.app)
 
 ## Endpoints
 

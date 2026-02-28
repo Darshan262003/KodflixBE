@@ -1,6 +1,14 @@
+// Load environment variables first
+require('dotenv').config();
+
+console.log('Environment variables loaded at server startup:');
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('DB_PORT:', process.env.DB_PORT);
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_NAME:', process.env.DB_NAME);
+
 const app = require('./app');
 const User = require('./models/User');
-require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
 

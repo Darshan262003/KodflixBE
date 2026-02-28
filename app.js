@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000', // Adjust for your frontend
+  origin: ['http://localhost:3000', 'https://kodflix-fe.vercel.app'], // Local dev and Vercel frontend
   credentials: true
 }));
 app.use(express.json());

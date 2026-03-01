@@ -1,6 +1,17 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
+// Debug environment variables
+console.log('=== ENVIRONMENT VARIABLES DEBUG ===');
+console.log('DB_HOST:', process.env.DB_HOST || 'NOT SET');
+console.log('DB_USER:', process.env.DB_USER || 'NOT SET');
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? 'SET' : 'NOT SET');
+console.log('DB_NAME:', process.env.DB_NAME || 'NOT SET');
+console.log('DB_PORT:', process.env.DB_PORT || 'NOT SET');
+console.log('DB_SSL_MODE:', process.env.DB_SSL_MODE || 'NOT SET');
+console.log('NODE_ENV:', process.env.NODE_ENV || 'NOT SET');
+console.log('=====================================');
+
 // Parse database configuration
 let dbConfig = {};
 
@@ -97,6 +108,15 @@ if (!hasDbConfig) {
 } else {
   console.log('✅ Database configuration is complete');
 }
+
+// Show final database configuration
+console.log('=== FINAL DATABASE CONFIG ===');
+console.log('Host:', dbConfig.host || 'UNDEFINED');
+console.log('Port:', dbConfig.port || 'UNDEFINED');
+console.log('User:', dbConfig.user || 'UNDEFINED');
+console.log('Database:', dbConfig.database || 'UNDEFINED');
+console.log('SSL:', dbConfig.ssl ? 'ENABLED' : 'DISABLED');
+console.log('===============================');
 
 // Create connection pool
 const pool = mysql.createPool({

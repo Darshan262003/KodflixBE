@@ -9,6 +9,7 @@ console.log('DB_NAME:', process.env.DB_NAME);
 
 const app = require('./app');
 const User = require('./models/User');
+const db = require('./config/db');
 
 const PORT = process.env.PORT || 3000;
 
@@ -16,7 +17,8 @@ const PORT = process.env.PORT || 3000;
 const startServer = async () => {
   try {
     // Check if database is configured
-    const hasDbConfig = process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASSWORD && process.env.DB_NAME && process.env.DB_PORT;
+    const dbConfig = db.connection ? db.connection.config : null;
+    const hasDbConfig = dbConfig && dbConfig.host && dbConfig.user && dbConfig.password && dbConfig.database;
     
     if (hasDbConfig) {
       // Create users table

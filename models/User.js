@@ -1,13 +1,17 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 
-// Check if database is configured
-const hasDbConfig = process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASSWORD && process.env.DB_NAME && process.env.DB_PORT;
-
 // Helper function to check database availability
 const checkDbAvailability = () => {
-  if (!hasDbConfig) {
-    throw new Error('Database not configured - please set DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, and DB_PORT environment variables');
+  // Check if database is properly configured
+  const dbConfig = require('../config/db');
+  if (!dbConfig || !dbConfig.connection || !dbConfig.connection.config) {
+    throw new Error('Database not configured - please check environment variables');
+  }
+  
+  const config = dbConfig.connection.config;
+  if (!config.host || !config.user || !config.password || !config.database) {
+    throw new Error('Database not configured - please set DB_HOST (connection string) or individual DB variables');
   }
 };
 

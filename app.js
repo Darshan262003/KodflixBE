@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: ['https://kodflix-fe.vercel.app', 'http://localhost:5173'], // Allow both domains
+  origin: ['https://kodflix-fe.vercel.app',  // Allow both domains
   credentials: true
 }));
 app.use(express.json());

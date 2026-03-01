@@ -23,6 +23,8 @@ const startServer = async () => {
     if (hasDbConfig) {
       // Create users table
       await User.createTable();
+      // Check and fix schema
+      await User.checkAndFixSchema();
       console.log('Database initialized successfully');
     } else {
       console.warn('⚠️  Database not configured - skipping table creation');

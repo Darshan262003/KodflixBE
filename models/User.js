@@ -1,18 +1,10 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 
-// Helper function to check database availability
+// Simple helper function to check database availability
 const checkDbAvailability = () => {
-  // Check if database is properly configured
-  const dbConfig = require('../config/db');
-  if (!dbConfig || !dbConfig.connection || !dbConfig.connection.config) {
-    throw new Error('Database not configured - please check environment variables');
-  }
-  
-  const config = dbConfig.connection.config;
-  if (!config.host || !config.user || !config.password || !config.database) {
-    throw new Error('Database not configured - please set DB_HOST (connection string) or individual DB variables');
-  }
+  // We'll just rely on the db module to throw errors if not configured
+  // Rather than trying to check its configuration which causes circular dependencies
 };
 
 class User {

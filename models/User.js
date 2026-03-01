@@ -1,9 +1,21 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 
+// Check if database is configured
+const hasDbConfig = process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASSWORD && process.env.DB_NAME && process.env.DB_PORT;
+
+// Helper function to check database availability
+const checkDbAvailability = () => {
+  if (!hasDbConfig) {
+    throw new Error('Database not configured - please set DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, and DB_PORT environment variables');
+  }
+};
+
 class User {
   // Create users table if it doesn't exist
   static async createTable() {
+    checkDbAvailability();
+    
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS users (
         uid INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,6 +39,8 @@ class User {
 
   // Create new user
   static async create(userData) {
+    checkDbAvailability();
+    
     const { uname, email, phn, password, role = 'user' } = userData;
     
     // Hash password
@@ -48,6 +62,8 @@ class User {
 
   // Find user by email
   static async findByEmail(email) {
+    checkDbAvailability();
+    
     const query = 'SELECT * FROM users WHERE email = ?';
     
     try {
@@ -60,6 +76,8 @@ class User {
 
   // Find user by uid
   static async findById(uid) {
+    checkDbAvailability();
+    
     const query = 'SELECT * FROM users WHERE uid = ?';
     
     try {

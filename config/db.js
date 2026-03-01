@@ -7,10 +7,12 @@ console.log('- Port:', process.env.DB_PORT || 'UNDEFINED');
 console.log('- User:', process.env.DB_USER || 'UNDEFINED');
 console.log('- Database:', process.env.DB_NAME || 'UNDEFINED');
 
-// Ensure environment variables are present
-if (!process.env.DB_HOST || !process.env.DB_USER || !process.env.DB_PASSWORD || !process.env.DB_NAME || !process.env.DB_PORT) {
-  console.error('Missing required database environment variables');
-  process.exit(1);
+// Check if we have all required database environment variables
+const hasDbConfig = process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASSWORD && process.env.DB_NAME && process.env.DB_PORT;
+
+if (!hasDbConfig) {
+  console.warn('⚠️  Database environment variables missing - database operations will fail');
+  console.warn('⚠️  This is normal during initial deployment - add env vars in Vercel settings');
 }
 
 // Create connection pool
